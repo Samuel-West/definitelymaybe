@@ -1,0 +1,33 @@
+{
+  "name": "definitelymaybe",
+  "version": "0.0.0",
+  "description": "A Tiny FP TS Library",
+  "main": "dist/index.js",
+  "author": "Sam West <64424580+Samuel-West@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "unit-test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "29.5.12",
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "jest": "29.7.0",
+    "prettier": "3.2.5",
+    "ts-jest": "29.1.2",
+    "ts-node": "10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "packageManager": "yarn@4.1.1"
+}

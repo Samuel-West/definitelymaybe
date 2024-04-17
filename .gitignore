@@ -1,0 +1,17 @@
+# Build artefacts
+dist
+node_modules
+.esbuild-dist
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+
+.DS_Store
+.idea
