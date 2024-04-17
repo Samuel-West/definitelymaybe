@@ -1,15 +1,19 @@
 {
-  "name": "definitelymaybe",
-  "version": "0.0.0",
+  "name": "definitely-maybe",
+  "version": "0.0.1",
   "description": "A Tiny FP TS Library",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "author": "Sam West <64424580+Samuel-West@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint \"{src,test}/**/*.ts\"",
-    "unit-test": "jest"
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "29.5.12",

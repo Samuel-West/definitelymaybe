@@ -8,7 +8,7 @@ describe('toEither', () => {
   };
 
   it('converts none to right', () => {
-    const either = toEither(none(), err);
+    const either = toEither(none, err);
     expect(either.value).toEqual(err);
   });
 

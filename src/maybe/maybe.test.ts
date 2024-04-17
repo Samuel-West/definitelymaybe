@@ -20,8 +20,7 @@ describe('maybe', () => {
   });
 
   it('is empty on a none', () => {
-    const someValue = none();
-    expect(someValue.isEmpty).toEqual(true);
+    expect(none.isEmpty).toEqual(true);
   });
 
   it('returns value on a some', () => {
@@ -30,15 +29,14 @@ describe('maybe', () => {
   });
 
   it('returns else on a none', () => {
-    const someFoo = none();
-    expect(someFoo.orElse('bar')).toEqual('bar');
+    expect(none.orElse('bar')).toEqual('bar');
   });
 
   it('handles chaining', () => {
     const res = some(5)
       .map((n) => n * 10)
       .map((n) => n.toString())
-      .flatMap((s) => (s === '50' ? some('Success!') : none<string>()));
+      .flatMap((s) => (s === '50' ? some('Success!') : none));
 
     expect(res.orElse('Fail')).toEqual('Success!');
   });

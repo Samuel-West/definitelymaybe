@@ -1912,9 +1912,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"definitelymaybe@workspace:.":
+"definitely-maybe@workspace:.":
   version: 0.0.0-use.local
-  resolution: "definitelymaybe@workspace:."
+  resolution: "definitely-maybe@workspace:."
   dependencies:
     "@types/jest": "npm:29.5.12"
     "@typescript-eslint/eslint-plugin": "npm:6.21.0"

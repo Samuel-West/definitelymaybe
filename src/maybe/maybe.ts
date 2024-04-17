@@ -1,4 +1,4 @@
-export type Maybe<T> = Some<T> | None<T>;
+export type Maybe<T> = Some<T> | None;
 
 export type Some<T> = {
   value: T;
@@ -8,11 +8,11 @@ export type Some<T> = {
   orElse: (elseVal: T) => T;
 };
 
-export type None<T> = {
-  map: () => None<T>;
-  flatMap: () => None<T>;
+export type None = {
+  map: () => None;
+  flatMap: () => None;
   isEmpty: true;
-  orElse: (elseVal: T) => T;
+  orElse: <T>(elseVal: T) => T;
 };
 
 export const some = <T>(value: T): Some<T> => ({
@@ -23,9 +23,9 @@ export const some = <T>(value: T): Some<T> => ({
   orElse: () => value,
 });
 
-export const none = <T>(): None<T> => ({
-  map: () => none(),
-  flatMap: () => none(),
+export const none: None = {
+  map: () => none,
+  flatMap: () => none,
   isEmpty: true,
-  orElse: (elseVal: T) => elseVal,
-});
+  orElse: <T>(elseVal: T) => elseVal,
+};

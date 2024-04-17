@@ -1,4 +1,4 @@
-# definitelymaybe
+# definitely-maybe
 
 ### A tiny functional library for TypeScript
 
