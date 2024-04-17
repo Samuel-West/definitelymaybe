@@ -37,4 +37,18 @@ describe('either', () => {
 
     expect(res.value).toEqual('Success!');
   });
+
+  it('maps err on right', () => {
+    const errVal = right(myErr).mapErr(() => 'No longer an err');
+
+    expect(errVal.isErr).toEqual(false);
+    expect(errVal.value).toEqual('No longer an err');
+  });
+
+  it('does nothing when mapping err on left', () => {
+    const errVal = left(10).mapErr(() => 'No longer an err');
+
+    expect(errVal.isErr).toEqual(false);
+    expect(errVal.value).toEqual(10);
+  });
 });

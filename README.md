@@ -19,6 +19,17 @@ const occurencesInFile = ({ path, text }: { path: string, text: string }): numbe
     .orElse(0);
 ``` 
 
+The `Right` side can additionally be remapped back to a `Left` using `errMap` (note this is not bidirectional, there is
+no way to convert a `Left` to a `Right`).
+
+```typescript
+const apiError: Right<unknown, Error> =
+  right(new Error('404 - Not Found'));
+
+const userFriendlyError: Left<string, unknown> =
+  apiError.mapErr(() => 'Oops something went wrong!');
+```
+
 ### Maybe
 
 Replacing `T | null` as an intermediary for a true `Optional` type. Like `Either` supports mapping and flatMapping
@@ -41,14 +52,15 @@ const appendStrCallback = (tail: string) => {
 
 Similar to `Try` in other languages, wraps an otherwise exception throwing function and returns an `Either` when thrown.
 
+An async version also exists with the same signature for working with Promises.
+
 ```typescript
 
-const highScore = attempt(fetchHighScoreFromApi)
+const highScore = attemptAsync(() => fetchHighScoreFromApi(playerId))
   .map((score) => `Your highscore is ${score}`)
 
 ```
 
 ## ** Todo **
 
-- ErrMap support on Either
 - Merging Eithers (or Validated, or both)
