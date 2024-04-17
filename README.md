@@ -5,7 +5,7 @@
 ### Either
 
 A simple implementation of the `Either` type (similar to `Result` types in other languages).
-`Either` either contains a value, `T` in the `Left`, or an `Error` in the Right.
+`Either` either contains a value, `T`, in the `Left`, or an `Error` in the Right.
 
 ```typescript
 const readFromFile = (path: string): Either<string, CannotReadFromFileError> =>
@@ -50,6 +50,5 @@ const highScore = attempt(fetchHighScoreFromApi)
 
 ## ** Todo **
 
-- Async Attempt
 - ErrMap support on Either
 - Merging Eithers (or Validated, or both)
