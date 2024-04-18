@@ -3,9 +3,6 @@ name: PR Check
 on:
   pull_request:
 
-env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 jobs:
   type-check:
     runs-on: ubuntu-latest
