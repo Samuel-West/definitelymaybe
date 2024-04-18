@@ -1,6 +1,6 @@
 {
   "name": "probably-maybe",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Tiny FP TS Library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

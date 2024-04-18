@@ -1,8 +1,8 @@
-import { Either, left, right } from '../either';
+import { failure, Result, success } from '../result';
 
-export const attempt = <T, Err extends Error>(fn: () => T): Either<T, Err> => {
+export const attempt = <T, Err extends Error>(fn: () => T): Result<T, Err> => {
   try {
-    return left(fn());
+    return success(fn());
   } catch (err: unknown) {
     const mappedErr = (
       err instanceof Error
@@ -13,16 +13,16 @@ export const attempt = <T, Err extends Error>(fn: () => T): Either<T, Err> => {
           }
     ) as Err;
 
-    return right(mappedErr);
+    return failure(mappedErr);
   }
 };
 
 export const attemptAsync = async <T, Err extends Error>(
   fn: () => Promise<T>
-): Promise<Either<T, Err>> => {
+): Promise<Result<T, Err>> => {
   try {
     const res = await fn();
-    return left(res);
+    return success(res);
   } catch (err: unknown) {
     const mappedErr = (
       err instanceof Error
@@ -33,6 +33,6 @@ export const attemptAsync = async <T, Err extends Error>(
           }
     ) as Err;
 
-    return right(mappedErr);
+    return failure(mappedErr);
   }
 };
