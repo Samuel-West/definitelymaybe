@@ -32,7 +32,7 @@ describe('toResult', () => {
     });
 
     it('converts invalid to failure', () => {
-      const result = toResult(invalid([testErr]));
+      const result = toResult(invalid('Foo', [testErr]));
 
       expect(result.isFailure).toEqual(true);
       expect(result.value).toEqual({

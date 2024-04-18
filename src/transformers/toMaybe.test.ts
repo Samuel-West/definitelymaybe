@@ -29,7 +29,7 @@ describe('toMaybe', () => {
     });
 
     it('converts invalid to none', () => {
-      const maybe = toMaybe(invalid([testErr]));
+      const maybe = toMaybe(invalid('Foo', [testErr]));
 
       expect(maybe).toEqual(none);
     });

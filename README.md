@@ -45,6 +45,18 @@ const appendStrCallback = (tail: string) => {
 };
 ```
 
+### Validated
+
+Similar to `Either` except with the ability to chain multiple evaluations together, producing either a `Valid<T>` or
+an `Invalid<Err[]>` containing a list of all validation errors.
+
+```typescript
+const usernamePresent = (user: User): Validated<User, InvalidUsernameError> =>
+  !!user.name ? valid(user) : invalid(user, new InvalidUsernameError(user));
+
+const validatedUser = valid(user).validate(usernamePresent);
+```
+
 ### Attempt
 
 Similar to `Try` in other languages, wraps an otherwise exception throwing function and returns an `Either` when thrown.
@@ -59,4 +71,4 @@ const highScore = attemptAsync(() => fetchHighScoreFromApi(playerId)).map(
 
 ## ** Todo **
 
-- Merging Eithers (or Validated, or both)
+- Make everything work with async
