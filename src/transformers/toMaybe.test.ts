@@ -1,19 +1,37 @@
-import { left, right } from '../either';
+import { success, failure } from '../result';
+import { none } from '../maybe';
+import { invalid, valid } from '../validated/validated';
 import { toMaybe } from './toMaybe';
+import { testErr } from './testUtils';
 
 describe('toMaybe', () => {
-  const err = {
-    name: 'Test Error',
-    message: 'Uh-oh',
-  };
+  describe('result', () => {
+    it('converts success to some', () => {
+      const maybe = toMaybe(success(5));
 
-  it('converts right to none', () => {
-    const maybe = toMaybe(right(err));
-    expect(maybe.isEmpty).toEqual(true);
+      expect(maybe.isPresent).toEqual(true);
+      expect(maybe.orElse(-1)).toEqual(5);
+    });
+
+    it('converts failure to none', () => {
+      const maybe = toMaybe(failure(testErr));
+
+      expect(maybe).toEqual(none);
+    });
   });
 
-  it('converts left to some', () => {
-    const maybe = toMaybe(left(5));
-    expect(maybe.isEmpty ? -1 : maybe.value).toEqual(5);
+  describe('validated', () => {
+    it('converts valid to some', () => {
+      const maybe = toMaybe(valid(5));
+
+      expect(maybe.isPresent).toEqual(true);
+      expect(maybe.orElse(-1)).toEqual(5);
+    });
+
+    it('converts invalid to none', () => {
+      const maybe = toMaybe(invalid([testErr]));
+
+      expect(maybe).toEqual(none);
+    });
   });
 });

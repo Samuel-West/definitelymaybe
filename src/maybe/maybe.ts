@@ -1,6 +1,7 @@
 export type Maybe<T> = Some<T> | None;
 
 export type Some<T> = {
+  kind: 'maybe';
   value: T;
   map: <U>(fn: (t: T) => U) => Some<U>;
   flatMap: <U>(fn: (t: T) => Maybe<U>) => Maybe<U>;
@@ -10,6 +11,7 @@ export type Some<T> = {
 };
 
 export type None = {
+  kind: 'maybe';
   map: () => None;
   flatMap: () => None;
   isPresent: false;
@@ -18,6 +20,7 @@ export type None = {
 };
 
 export const some = <T>(value: T): Some<T> => ({
+  kind: 'maybe',
   value,
   map: <U>(fn: (t: T) => U) => some(fn(value)),
   flatMap: <U>(fn: (t: T) => Maybe<U>) => fn(value),
@@ -27,6 +30,7 @@ export const some = <T>(value: T): Some<T> => ({
 });
 
 export const none: None = {
+  kind: 'maybe',
   map: () => none,
   flatMap: () => none,
   isPresent: false,

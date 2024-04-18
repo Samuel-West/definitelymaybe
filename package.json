@@ -1,7 +1,11 @@
 {
   "name": "probably-maybe",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Tiny FP TS Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Samuel-West/definitelymaybe.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,7 +14,8 @@
   "author": "Sam West <64424580+Samuel-West@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --p tsconfig.build.json",
+    "clean": "rm -rf dist",
+    "build": "rm -rf dist && tsc --p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write .",
     "lint": "eslint src",

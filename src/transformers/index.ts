@@ -1,2 +1,3 @@
 export * from './toMaybe';
-export * from './toEither';
+export * from './toResult';
+export * from './toValidated';
