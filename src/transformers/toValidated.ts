@@ -2,7 +2,7 @@ import { invalid, valid, Validated } from '../validated/validated';
 import { Result } from '../result';
 import { Maybe } from '../maybe';
 
-export type TransformInput<T, Err extends Error> = Result<T, Err> | Maybe<T>;
+type TransformInput<T, Err extends Error> = Result<T, Err> | Maybe<T>;
 
 export const toValidated = <T, Err extends Error>(
   input: TransformInput<T, Err>
