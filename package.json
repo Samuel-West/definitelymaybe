@@ -1,6 +1,6 @@
 {
   "name": "probably-maybe",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "A Tiny FP TS Library",
   "repository": {
     "type": "git",
@@ -19,7 +19,8 @@
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write .",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "yarn test && yarn build && yarn typecheck && yarn lint && yarn prettier"
   },
   "devDependencies": {
     "@types/jest": "29.5.12",
