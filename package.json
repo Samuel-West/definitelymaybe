@@ -1,6 +1,6 @@
 {
   "name": "probably-maybe",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Tiny FP TS Library",
   "repository": {
     "type": "git",

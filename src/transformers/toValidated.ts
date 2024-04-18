@@ -5,12 +5,13 @@ import { Maybe } from '../maybe';
 type TransformInput<T, Err extends Error> = Result<T, Err> | Maybe<T>;
 
 export const toValidated = <T, Err extends Error>(
-  input: TransformInput<T, Err>
+  input: TransformInput<T, Err>,
+  defaultValue: T
 ): Validated<T, Err> => {
   switch (input.kind) {
     case 'result':
-      return input.isSuccess ? valid(input.value) : invalid([input.value]);
+      return input.isSuccess ? valid(input.value) : invalid(defaultValue, [input.value]);
     case 'maybe':
-      return input.isPresent ? valid(input.value) : invalid([] as Err[]);
+      return input.isPresent ? valid(input.value) : invalid(defaultValue, [] as Err[]);
   }
 };
