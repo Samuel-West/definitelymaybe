@@ -21,7 +21,7 @@ export const attemptAsync = async <T, Err extends Error>(
   fn: () => Promise<T>
 ): Promise<Result<T, Err>> => {
   try {
-    const res = await fn();
+    const res: T = await fn();
     return success(res);
   } catch (err: unknown) {
     const mappedErr = (

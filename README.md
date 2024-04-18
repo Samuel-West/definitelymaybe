@@ -37,12 +37,11 @@ const fetchUserId = async (username: string): Promise<Result<ID, Error>> =>
   fetchUser(username).then((user) => user.id);
 
 const fetchHighScore = async (userId: ID): Promise<Result<string, Error>> =>
-  fetchHighscore(userId).then((score) => !!score ? success(score) : failure(new Error('Failed to fetch highscore')));
+  fetchHighscore(userId).then((score) =>
+    !!score ? success(score) : failure(new Error('Failed to fetch highscore'))
+  );
 
-const userScore = left(username)
-  .mapAsync(fetchUserId)
-  .flatMapAsync(fetchHighScore)
-
+const userScore = left(username).mapAsync(fetchUserId).flatMapAsync(fetchHighScore);
 ```
 
 ### Maybe
@@ -67,11 +66,9 @@ const fetchUserId = async (username: string): Promise<Maybe<ID>> =>
   fetchUser(username).then((user) => user.id);
 
 const fetchHighScore = async (userId: ID): Promise<Result<string, Error>> =>
-  fetchHighscore(userId).then((score) => !!score ? some(score) : none);
+  fetchHighscore(userId).then((score) => (!!score ? some(score) : none));
 
-const userScore = some(username)
-  .mapAsync(fetchUserId)
-  .flatMapAsync(fetchHighScore)
+const userScore = some(username).mapAsync(fetchUserId).flatMapAsync(fetchHighScore);
 ```
 
 ### Validated
