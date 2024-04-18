@@ -1,7 +1,7 @@
 import { none, some } from '../maybe';
 import { invalid, valid } from '../validated/validated';
+import { testErr } from '../testUtils';
 import { toResult } from './toResult';
-import { testErr } from './testUtils';
 
 describe('toResult', () => {
   describe('maybe', () => {

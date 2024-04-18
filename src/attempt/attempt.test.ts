@@ -1,3 +1,4 @@
+import { sleepResolve, sleepThrow } from '../testUtils';
 import { attempt, attemptAsync } from './attempt';
 
 describe('attempt', () => {
@@ -30,16 +31,8 @@ describe('attempt', () => {
 });
 
 describe('attemptAsync', () => {
-  const timeout = (duration: number) =>
-    new Promise(function (resolve) {
-      setTimeout(resolve, duration);
-    });
-
   it('returns failure when an exception is thrown', async () => {
-    const sleep = () =>
-      timeout(100).then(() => {
-        throw new Error('Whoops');
-      });
+    const sleep = () => sleepThrow(100, new Error('Whoops'));
 
     const res = await attemptAsync(sleep);
 
@@ -48,10 +41,7 @@ describe('attemptAsync', () => {
   });
 
   it('returns failure with generic error if something else is thrown', async () => {
-    const sleep = () =>
-      timeout(100).then(() => {
-        throw 'Foo';
-      });
+    const sleep = () => sleepThrow(100, 'Foo');
 
     const res = await attemptAsync(sleep);
 
@@ -63,7 +53,7 @@ describe('attemptAsync', () => {
   });
 
   it('returns success when no exception is thrown', async () => {
-    const sleep = () => timeout(100).then(() => 5);
+    const sleep = () => sleepResolve(100, 5);
 
     const res = await attemptAsync(sleep);
 
