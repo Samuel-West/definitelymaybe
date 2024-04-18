@@ -1,3 +1,4 @@
+import { sleep, sleepResolve, testErr } from '../testUtils';
 import { success, failure } from './result';
 
 describe('result', () => {
@@ -50,5 +51,30 @@ describe('result', () => {
 
     expect(errVal.isFailure).toEqual(false);
     expect(errVal.value).toEqual(10);
+  });
+});
+
+describe('resultAsync', () => {
+  it('maps a success', async () => {
+    const res = await success(5).mapAsync((n) => sleep(100).then(() => n * 2));
+
+    expect(res.value).toEqual(10);
+  });
+
+  it('flatmaps a success', async () => {
+    const res = await success(5).flatMapAsync((n) => sleep(100).then(() => success(n * 2)));
+
+    expect(res.value).toEqual(10);
+  });
+
+  it('handles async chaining', async () => {
+    const res = await success(5)
+      .mapAsync((n) => sleepResolve(50, n * 10))
+      .then((_) => _.mapAsync((n) => sleepResolve(50, n.toString())))
+      .then((_) =>
+        _.flatMapAsync((s) => sleepResolve(50, s === '50' ? success('Success!') : failure(testErr)))
+      );
+
+    expect(res.value).toEqual('Success!');
   });
 });

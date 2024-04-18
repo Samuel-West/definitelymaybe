@@ -1,3 +1,4 @@
+import { sleep, sleepResolve } from '../testUtils';
 import { none, some } from './maybe';
 
 describe('maybe', () => {
@@ -41,6 +42,29 @@ describe('maybe', () => {
       .map((n) => n * 10)
       .map((n) => n.toString())
       .flatMap((s) => (s === '50' ? some('Success!') : none));
+
+    expect(res.orElse('Fail')).toEqual('Success!');
+  });
+});
+
+describe('maybeAsync', () => {
+  it('maps a some', async () => {
+    const res = await some(5).mapAsync(async (n) => await sleep(100).then(() => n * 2));
+
+    expect(res.value).toEqual(10);
+  });
+
+  it('flatmaps a some', async () => {
+    const res = await some(5).flatMapAsync(async (n) => await sleep(100).then(() => some(n * 2)));
+
+    expect(res.orElse(0)).toEqual(10);
+  });
+
+  it('handles async chaining', async () => {
+    const res = await some(5)
+      .mapAsync((n) => sleepResolve(50, n * 10))
+      .then((_) => _.mapAsync((n) => sleepResolve(50, n.toString())))
+      .then((_) => _.flatMapAsync((s) => sleepResolve(50, s === '50' ? some('Success!') : none)));
 
     expect(res.orElse('Fail')).toEqual('Success!');
   });

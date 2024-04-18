@@ -1,8 +1,8 @@
 import { success, failure } from '../result';
 import { none } from '../maybe';
 import { invalid, valid } from '../validated/validated';
+import { testErr } from '../testUtils';
 import { toMaybe } from './toMaybe';
-import { testErr } from './testUtils';
 
 describe('toMaybe', () => {
   describe('result', () => {

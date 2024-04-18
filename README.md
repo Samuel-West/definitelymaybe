@@ -30,6 +30,21 @@ const userFriendlyError: Left<string, unknown> = apiError.mapErr(
 );
 ```
 
+When working with Promises there are also `async` equivalents of `map` and `flatMap`
+
+```typescript
+const fetchUserId = async (username: string): Promise<Result<ID, Error>> =>
+  fetchUser(username).then((user) => user.id);
+
+const fetchHighScore = async (userId: ID): Promise<Result<string, Error>> =>
+  fetchHighscore(userId).then((score) => !!score ? success(score) : failure(new Error('Failed to fetch highscore')));
+
+const userScore = left(username)
+  .mapAsync(fetchUserId)
+  .flatMapAsync(fetchHighScore)
+
+```
+
 ### Maybe
 
 Replacing `T | null` as an intermediary for a true `Optional` type. Like `Either` supports mapping and flatMapping
@@ -43,6 +58,20 @@ const appendStrCallback = (tail: string) => {
 
   setStr(newStrVal);
 };
+```
+
+As with `Result` there are async versions of `map` and `flatMap` for `Maybe`.
+
+```typescript
+const fetchUserId = async (username: string): Promise<Maybe<ID>> =>
+  fetchUser(username).then((user) => user.id);
+
+const fetchHighScore = async (userId: ID): Promise<Result<string, Error>> =>
+  fetchHighscore(userId).then((score) => !!score ? some(score) : none);
+
+const userScore = some(username)
+  .mapAsync(fetchUserId)
+  .flatMapAsync(fetchHighScore)
 ```
 
 ### Validated
@@ -71,4 +100,4 @@ const highScore = attemptAsync(() => fetchHighScoreFromApi(playerId)).map(
 
 ## ** Todo **
 
-- Make everything work with async
+- mapN equivalent
