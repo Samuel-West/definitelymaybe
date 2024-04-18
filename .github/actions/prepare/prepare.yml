@@ -1,0 +1,27 @@
+name: 'Install dependencies'
+description: 'Install dependencies with yarn'
+inputs:
+  node-version:
+    description: The version of node to setup an environment for
+    default: '20.11'
+    required: false
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Setup NodeJS ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      id: setup-node
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Enable Corepack
+      shell: bash
+      working-directory: '.'
+      run: corepack enable
+
+    - name: Install dependencies
+      shell: bash
+      working-directory: '.'
+      run: yarn install --immutable

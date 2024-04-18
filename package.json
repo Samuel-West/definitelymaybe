@@ -10,9 +10,10 @@
   "author": "Sam West <64424580+Samuel-West@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "prettier": "prettier --write .",
+    "lint": "eslint src",
     "test": "jest"
   },
   "devDependencies": {
